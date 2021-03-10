@@ -3,7 +3,6 @@
 .bloop/*
 .metals/*
 .vscode/*
-.idea/*
 project/*
 !project/build.properties
 target
