@@ -7,4 +7,5 @@
 project/*
 !project/build.properties
 target
-
+.bsp
+.idea
