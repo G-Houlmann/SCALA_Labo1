@@ -1,6 +1,7 @@
 import Chat.Tokenizer
 import Chat.Tokens._
 import Utils.ClinksCalculator.calculateCombination
+import Utils.SpellChecker
 
 import scala.io.StdIn
 
@@ -16,6 +17,9 @@ object Main extends App {
         for (i <- 2 to 6) {
           println(s"Nombre de *clinks* pour un santé de $i personnes : ${calculateCombination(i, 2)}.")
         }
+      }
+      case "test" => {
+       println(SpellChecker.getClosestWordInDictionary("diète"))
       }
       case s => {
         val tokenizer = new Tokenizer(s)

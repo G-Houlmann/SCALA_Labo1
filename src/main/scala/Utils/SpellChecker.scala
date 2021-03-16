@@ -20,6 +20,13 @@ object SpellChecker {
     }
   }
 
+
+  //TODO use match case somehow
+  def minWord(word1: (String, Int), word2: (String, Int)): (String, Int) = {
+    if(word1._2 == word2._2) if(word1._1 < word2._1) word1 else word2
+    else if(word1._2 < word2._2) word1 else word2
+  }
+
   /**
     * Get the syntactically closest word in the dictionary from the given misspelled word, using the "stringDistance"
     * function. If the word is a number, this function just returns it.
@@ -29,12 +36,11 @@ object SpellChecker {
   // TODO - Step 2
   def getClosestWordInDictionary(misspelledWord: String): String = {
     misspelledWord match {
-      case name if (misspelledWord[0] == '_') => misspelledWord
+      case name if (misspelledWord.charAt(0) == '_') => misspelledWord
       case number if (misspelledWord forall Character.isDigit) => misspelledWord
-      case _ => {
-        //dictionary.keys.map(k => (k, stringDistance(k, misspelledWord))). //Je vois pas trop comment faire ça en fait
-        "to be implemented"
-      }
+      case _ =>
+        dictionary getOrElse(dictionary.keys.map(k => (k, stringDistance(k, misspelledWord))).reduceLeft(minWord)._1,
+          throw new Error("Unexpected error when searching for the best match"))
     }
   }
 }
