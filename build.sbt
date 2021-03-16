@@ -10,4 +10,4 @@ javaOptions in run := List(
 )
 fork in run := true
 outputStrategy := Some(StdoutOutput) // directly write output in console
-connectInput in run := true
+connectInput in run := true // connect console input to the fork

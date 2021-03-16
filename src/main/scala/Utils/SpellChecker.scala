@@ -27,5 +27,14 @@ object SpellChecker {
     * @return the closest word from "misspelledWord"
     */
   // TODO - Step 2
-  def getClosestWordInDictionary(misspelledWord: String): String = ???
+  def getClosestWordInDictionary(misspelledWord: String): String = {
+    misspelledWord match {
+      case name if (misspelledWord[0] == '_') => misspelledWord
+      case number if (misspelledWord forall Character.isDigit) => misspelledWord
+      case _ => {
+        //dictionary.keys.map(k => (k, stringDistance(k, misspelledWord))). //Je vois pas trop comment faire ça en fait
+        "to be implemented"
+      }
+    }
+  }
 }
