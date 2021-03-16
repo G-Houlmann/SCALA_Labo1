@@ -21,10 +21,16 @@ object SpellChecker {
   }
 
 
-  //TODO use match case somehow
   def minWord(word1: (String, Int), word2: (String, Int)): (String, Int) = {
-    if(word1._2 == word2._2) if(word1._1 < word2._1) word1 else word2
-    else if(word1._2 < word2._2) word1 else word2
+    word1._2 match {
+      case equal if(word1._2 == word2._2) => if(word1._1 < word2._1) word1 else word2
+      case lower if(word1._2 < word2._2) => word1
+      case _ => word2
+    }
+
+    //With conditional operators
+//    if(word1._2 == word2._2) if(word1._1 < word2._1) word1 else word2
+//    else if(word1._2 < word2._2) word1 else word2
   }
 
   /**
