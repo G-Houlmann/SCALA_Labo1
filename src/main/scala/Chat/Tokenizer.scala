@@ -14,8 +14,9 @@ class Tokenizer(input: String) {
     */
   // TODO - Step 3
   def tokenize(): Unit = {
-    //not tested
-    tokens = input.filter(c => !List('.',',','!','?','*').contains(c)).replace("'", " ").replace("  "," ").split(" ")
+    tokens = input.filter(c => !List('.',',','!','?','*').contains(c)).replace("'", " ").replaceAll(" +"," ").split(" ")
+    tokens.foreach(println) //for debugging purposes TODO remove
+
   }
 
   /**
