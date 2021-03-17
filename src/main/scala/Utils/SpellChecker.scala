@@ -23,8 +23,8 @@ object SpellChecker {
 
   def minWord(word1: (String, Int), word2: (String, Int)): (String, Int) = {
     word1._2 match {
-      case equal if(word1._2 == word2._2) => if(word1._1 < word2._1) word1 else word2
-      case lower if(word1._2 < word2._2) => word1
+      case equal if word1._2 == word2._2 => if(word1._1 < word2._1) word1 else word2
+      case lower if word1._2 < word2._2 => word1
       case _ => word2
     }
 
@@ -39,11 +39,10 @@ object SpellChecker {
     * @param misspelledWord the misspelled word to correct
     * @return the closest word from "misspelledWord"
     */
-  // TODO - Step 2
   def getClosestWordInDictionary(misspelledWord: String): String = {
     misspelledWord match {
-      case name if (misspelledWord.charAt(0) == '_') => misspelledWord
-      case number if (misspelledWord forall Character.isDigit) => misspelledWord
+      case name if misspelledWord.charAt(0) == '_' => misspelledWord
+      case number if misspelledWord forall Character.isDigit => misspelledWord
       case _ =>
         dictionary getOrElse(dictionary.keys.map(k => (k, stringDistance(k, misspelledWord))).reduceLeft(minWord)._1,
           throw new Error("Unexpected error when searching for the best match"))
