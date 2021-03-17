@@ -6,7 +6,7 @@ import Utils.SpellChecker
 class Tokenizer(input: String) {
 
   private var tokens : Array[(String, Token)] = Array()
-  private var index = 0
+  private var tokensIterator = tokens.iterator
 
   /**
     * Separate the user's input into tokens.
@@ -35,6 +35,8 @@ class Tokenizer(input: String) {
       .replaceAll(" +"," ")
       .split(" ")
       .map(t => getAsToken(SpellChecker.getClosestWordInDictionary(t)))
+
+    tokensIterator = tokens.iterator
   }
 
   /**
@@ -42,9 +44,8 @@ class Tokenizer(input: String) {
   	* @return a tuple that contains the string value of the current token, and the identifier of the token
     */
   def nextToken(): (String, Token) = {
-    if(index < tokens.length){
-      index+=1 //TODO pas beau mais ya pas de ++
-      tokens(index-1)
+    if(tokensIterator.hasNext){
+      tokensIterator.next()
     }else{
       ("EOL", Tokens.EOL)
     }
