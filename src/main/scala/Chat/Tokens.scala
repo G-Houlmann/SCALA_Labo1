@@ -6,6 +6,7 @@ object Tokens {
   // Terms
   val BONJOUR: Token     = 0
   val JE: Token          = 1
+  val SVP: Token         = 12 //Added by student, chose not to shift all the IDs so used 12
   // Actions
   val ETRE: Token        = 2
   val VOULOIR: Token     = 3

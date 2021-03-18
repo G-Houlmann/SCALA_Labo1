@@ -15,13 +15,13 @@ class Tokenizer(input: String) {
     word match {
       case "bonjour" => (word, Tokens.BONJOUR)
       case "je" => (word, Tokens.JE)
+      case "svp" => (word, Tokens.SVP)
       case "etre" => (word, Tokens.ETRE)
       case "vouloir" => (word, Tokens.VOULOIR)
       case "et" => (word, Tokens.ET)
       case "ou" => (word, Tokens.OU)
       case "biere" => (word, Tokens.BIERE)
       case "croissant" => (word, Tokens.CROISSANT)
-        //TODO "svp" is in the dictionnary but not in the tokens
       case name if word.charAt(0) == '_' => (word, Tokens.PSEUDO)
       case number if word forall Character.isDigit => (word, Tokens.NUM)
       case _ => (word, Tokens.UNKNOWN)
