@@ -8,11 +8,13 @@ class Tokenizer(input: String) {
   private var tokens : Array[(String, Token)] = Array()
   private var tokensIterator = tokens.iterator
 
+
   /**
-    * Separate the user's input into tokens.
+    * Transform a word into a token
+    * @param word A word as a String
+    * @return word as a Token
     */
-  private def getAsToken(word: String): (String, Token) = {
-    word match {
+  private def getAsToken(word: String): (String, Token) = word match {
       case "bonjour" => (word, Tokens.BONJOUR)
       case "je" => (word, Tokens.JE)
       case "svp" => (word, Tokens.SVP)
@@ -22,13 +24,15 @@ class Tokenizer(input: String) {
       case "ou" => (word, Tokens.OU)
       case "biere" => (word, Tokens.BIERE)
       case "croissant" => (word, Tokens.CROISSANT)
-      case name if word.charAt(0) == '_' => (word, Tokens.PSEUDO)
-      case number if word forall Character.isDigit => (word, Tokens.NUM)
+      case _ if word.charAt(0) == '_' => (word, Tokens.PSEUDO)
+      case _ if word forall Character.isDigit => (word, Tokens.NUM)
       case _ => (word, Tokens.UNKNOWN)
 
     }
-  }
 
+  /**
+    * Separate the user's input into tokens.
+    */
   def tokenize(): Unit = {
     tokens = input.filter(c => !List('.',',','!','?','*').contains(c))
       .replace("'", " ")
