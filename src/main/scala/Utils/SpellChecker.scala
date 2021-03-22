@@ -9,14 +9,12 @@ object SpellChecker {
     * @param s2 the second word
     * @return an integer value, which indicates the Levenshtein distance between "s1" and "s2"
     */
-  def stringDistance(s1: String, s2: String): Int = {
-    if (Math.min(s1.length, s2.length) == 0) {
-      Math.max(s1.length, s2.length)
-    } else if (s1(0) == s2(0)) {
-      stringDistance(s1.tail, s2.tail)
-    } else {
-      1 + Seq(stringDistance(s1.tail, s2), stringDistance(s1, s2.tail), stringDistance(s1.tail, s2.tail)).min
-    }
+  def stringDistance(s1: String, s2: String): Int = (s1.length, s2.length) match {
+    case (0, l2) => l2
+    case (l1, 0) => l1
+    case _ if s1(0) == s2(0) => stringDistance(s1.tail, s2.tail)
+    case _ => 1 + Math.min(stringDistance(s1.tail, s2),
+                           Math.min(stringDistance(s1, s2.tail), stringDistance(s1.tail, s2.tail)))
   }
 
   /**
